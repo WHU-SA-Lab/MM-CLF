@@ -17,7 +17,7 @@ class HSTECModel(nn.Module):
         self.proj_hidden_size = 768
 
         text_hidden_size = self.text_encoder.hidden_size
-        image_hidden_size = config.image_model_hidden_sizes[config.image_encoder]
+        self.image_hidden_size = config.image_model_hidden_sizes[config.image_encoder]
 
         # attention
         self.attention = nn.TransformerEncoderLayer(
@@ -55,7 +55,7 @@ class HSTECModel(nn.Module):
         image_pooler_output, image_last_hidden_state = self.image_encoder(text_inputs, image_inputs)
 
         image_pooler_output = image_pooler_output.view(-1, image_pooler_output.size(1)) # (batch_size, image_hidden_size)
-        image_last_hidden_state = image_last_hidden_state.view(image_last_hidden_state.size(0), -1, image_hidden_size) # (batch_size, seq_len, image_hidden_size)
+        image_last_hidden_state = image_last_hidden_state.view(image_last_hidden_state.size(0), -1, self.image_hidden_size) # (batch_size, seq_len, image_hidden_size)
 
         text_last_hidden_state = self.text_proj(text_last_hidden_state) # (batch_size, seq_len, proj_hidden_size)
         image_last_hidden_state = self.image_proj(image_last_hidden_state) # (batch_size, seq_len, proj_hidden_size)
