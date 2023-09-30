@@ -11,7 +11,38 @@ In this framework, the Text Feature Representation module and Image Feature Repr
 ### Sketch Map 
 ![模型总图](https://github.com/WHU-SA-Lab/MM-CLF/assets/68259380/60c99fd3-88f7-48d0-93f7-1e8deac6cecf)
 
-## Requirements
+We provide 5 kinds of fusion types to choose.  [referance](https://github.com/YeexiaoZheng/Multimodal-Sentiment-Analysis)
+
+### File Structure
+```
+.
+|-- README.md
+|-- config.py
+|-- data
+|   `-- README.md
+|-- main.py
+|-- model
+|-- models
+|   |-- __init__.py
+|   |-- encoder_image.py
+|   |-- encoder_text.py
+|   |-- fusion_CMAC.py
+|   |-- fusion_HSTEC.py
+|   |-- fusion_OTE.py
+|   |-- fusion_combine.py
+|   |-- fusion_concat.py
+|   |-- only_image.py
+|   `-- only_text.py
+|-- test.ipynb
+|-- train.py
+`-- utils.py
+
+3 directories, 17 files
+```
+
+## Useage
+
+### Requirements
 datasets==2.13.1
 open_clip_torch==2.20.0
 Pillow==9.4.0
@@ -21,7 +52,68 @@ torch==2.0.0
 torchvision==0.15.0
 tqdm==4.64.1
 transformers==4.33.0  
-```pip install -r requirements.txt```
 
-## Useage
+Use this code to download all requirements
+```
+pip install -r requirements.txt
+```
 
+
+### Download Text/Image models
+Download model parameters using the following link
+
+Text Models
+1. [BERT](https://huggingface.co/hfl/chinese-bert-wwm-ext)
+2. [RoBERTa](https://huggingface.co/hfl/chinese-roberta-wwm-ext)
+3. [Taiyi](https://huggingface.co/IDEA-CCNL/Taiyi-CLIP-RoBERTa-102M-ViT-L-Chinese)
+
+Image Models
+1. [Resnet-50](https://huggingface.co/microsoft/resnet-50)
+2. [Vit](https://huggingface.co/google/vit-base-patch16-224)
+
+### Prepare data
+You can download and use the dataset we provided or make your own dataset by reading the README.md
+
+- douyin fake-comments dataset
+
+[click here to download our dataset]()
+
+- check out the instructions
+
+```cd /data``` and read the README.md file
+
+### Train and Test
+
+#### Overview
+
+This documentation below provides detailed insights into the functionality of the available arguments.
+
+##### Primary Arguments
+1. `--dataset` (required): Specifies the dataset name to be used, such as `douyin_fake_comments`. It is a string type argument.
+2. `--do_train` (boolean flag): If set, the script will train the model on the training set.
+3. `--do_test` (boolean flag): If set, the script will evaluate the model on the test set.
+4. `--text_encoder`: Specifies the encoder used for text. The default value is `bert`, but it can also be set to `roberta`. It is a string type argument.
+5. `--image_encoder`: Specifies the encoder used for images. The default value is `resnet`, but it can also be set to `vit`. It is a string type argument.
+6. `--fuse_model_type`: Defines the model for fusing text and image modalities. The default is `concat`, but other options include `combine`, `CMAC`, `HSTEC`, and `OTE`. It is a string type argument.
+
+##### Secondary Arguments
+7. `--text_max_seq_len`: Determines the maximum sequence length for text. It is set to 256 by default and is of type integer.
+8. `--image_size`: Defines the image size for the image encoder. The default value is 224 and is of type integer.
+9. `--image_hidden_size`: Sets the image hidden size for CMAC, HSTEC, and OTE. It has a default value of 64 and is of type integer.
+10. `--image_seq_len`: Determines the image sequence length for CMAC, HSTEC, and OTE. It has a default value of 64 and is of type integer.
+11. `--lr`: Sets the learning rate. The default value is `5e-5` and is of type float.
+12. `--weight_decay`: Defines the weight decay. The default value is `1e-2` and is of type float.
+13. `--epoch`: Determines the training epoch. The default value is 1 and is of type integer.
+14. `--load_model_path`: Specifies the path to load the trained model. The default value is `None`, indicating no model is loaded by default. It is a string type argument.
+15. `--only_text` (boolean flag): If set, the script will only use text to predict.
+16. `--only_image` (boolean flag): If set, the script will only use images to predict.
+17. `--cuda_device`: Sets the CUDA device to be used. The default value is 0 and is of type integer.
+18. `--use_cache` (boolean flag): If set, the script will use cached data or create it if no cached data is found.
+19. `--draw_confusion_matrix` (boolean flag): If set, the script will draw the confusion matrix.
+
+#### Usage Example:
+```sh
+python main.py --dataset douyin_fake_comments --do_train --do_test --text_encoder bert --image_encoder resnet --fuse_model_type concat
+```
+
+In the above example, replace `main.py` with the actual name of your script. This example will run the script on the `douyin_fake_comments` dataset, performing both training and testing using `bert` as the text encoder, `resnet` as the image encoder, and `concat` as the fusion model type.
