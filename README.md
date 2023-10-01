@@ -1,5 +1,5 @@
 # MM-CLF
-A MultiModel Classification framework.
+A MultiModel Classification Framework.
 
 ## Framework：
 The framework includes three aspects：  
