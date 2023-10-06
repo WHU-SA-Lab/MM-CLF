@@ -33,7 +33,7 @@ class HSTECModel(nn.Module):
         )
 
         self.image_proj = nn.Sequential(
-            nn.Linear(image_hidden_size, self.proj_hidden_size)
+            nn.Linear(self.image_hidden_size, self.proj_hidden_size)
         )
 
         # residual

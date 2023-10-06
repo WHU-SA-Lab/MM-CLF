@@ -1,21 +1,3 @@
-# import os
-# os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# import warnings
-# warnings.filterwarnings("ignore")
-# import sys
-# sys.path.append('./utils')
-# sys.path.append('./utils/APIs')
-
-# import torch
-
-# import argparse
-# from Config import config, model_path_dict
-# from utils.common import data_format, read_from_file, train_val_split, save_model, write_to_file
-# from Models import ConcatModel, CombineModel, CMACModel, HSTECModel, OTEModel
-# from utils.DataProcess import Processor
-# from Trainer import Trainer
-# import pickle
-
 
 import os
 import argparse
