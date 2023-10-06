@@ -3,7 +3,6 @@ import os
 import argparse
 from config import base_config
 from utils import setup_logger, read_data, save_cache_data, read_cache_data, setup_processor
-# from models import *
 import torch
 from torch.utils.data import DataLoader, Dataset
 from transformers import AutoTokenizer, AutoImageProcessor
