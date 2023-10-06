@@ -10,7 +10,7 @@ The framework includes three aspects：
 In this framework, the Text Feature Representation module and Image Feature Representation module allow for the free selection of different feature encoders to obtain suitable combinations of feature encoders. Additionally, it is able to flexibly adjust the modality fusion strategy to effectively capture interactions between different modalities and reduce redundant information during model training.
 
 ### Sketch Map 
-![模型总图](https://github.com/WHU-SA-Lab/MM-CLF/assets/68259380/60c99fd3-88f7-48d0-93f7-1e8deac6cecf)
+![模型总图](./assets/model.png)
 
 We provide 5 kinds of fusion types to choose, Naive Concat, Naice Combine, CMAC, OTE, and HSTEC.
 
