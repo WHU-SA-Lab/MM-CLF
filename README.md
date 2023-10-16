@@ -77,7 +77,7 @@ Image Models
 ### Prepare data
 You can download and use the dataset we provide or build your own dataset following the instructions in the `./data/README.md`
 
-[click here to download our douyin fake comments dataset]()
+[click here to download our douyin fake comments dataset](https://pan.baidu.com/s/1FutYEBdTkX0Gmd5Csf-XkQ?pwd=ikv1)
 
 ### Train and Test
 
